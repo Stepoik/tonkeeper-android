@@ -1,29 +1,43 @@
-package com.tonapps.tonkeeper.ui.screen.swap
+package com.tonapps.tonkeeper.ui.screen.swap.main
 
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import com.tonapps.tonkeeper.sign.SignRequestEntity
 import com.tonapps.tonkeeper.ui.screen.root.RootViewModel
+import com.tonapps.tonkeeper.ui.screen.swap.main.components.ReceiveComponent
+import com.tonapps.tonkeeper.ui.screen.swap.main.components.SendComponent
 import com.tonapps.tonkeeperx.BuildConfig
 import com.tonapps.tonkeeperx.R
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import uikit.base.BaseFragment
 import uikit.extensions.applyNavBottomPadding
 import uikit.extensions.getDimensionPixelSize
+import uikit.navigation.Navigation.Companion.navigation
 import uikit.widget.webview.bridge.BridgeWebView
 
-class SwapScreen: BaseFragment(R.layout.fragment_swap), BaseFragment.BottomSheet {
+class SwapScreen : BaseFragment(R.layout.fragment_swap), BaseFragment.BottomSheet {
 
     private val args: SwapArgs by lazy { SwapArgs(requireArguments()) }
 
     private val rootViewModel: RootViewModel by activityViewModel()
 
+    private val swapViewModel: SwapViewModel by viewModel()
+
     private lateinit var webView: BridgeWebView
+    private lateinit var swapButton: View
+    private lateinit var closeButton: View
+    private lateinit var receiveComponent: ReceiveComponent
+    private lateinit var sendComponent: SendComponent
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        sendComponent = SendComponent(view, swapViewModel, navigation, this)
+        receiveComponent = ReceiveComponent(view, swapViewModel, navigation, this, requireContext())
+
         webView = view.findViewById(R.id.web)
         webView.clipToPadding = false
         webView.applyNavBottomPadding(requireContext().getDimensionPixelSize(uikit.R.dimen.offsetMedium))
@@ -33,6 +47,13 @@ class SwapScreen: BaseFragment(R.layout.fragment_swap), BaseFragment.BottomSheet
             close = ::finish,
             sendTransaction = ::sing
         )
+
+        swapButton = view.findViewById(R.id.action_swap)
+        swapButton.setOnClickListener { swapViewModel.swap() }
+
+        closeButton = view.findViewById(R.id.action_close)
+        closeButton.setOnClickListener { finish() }
+
     }
 
     private fun getUri(): Uri {

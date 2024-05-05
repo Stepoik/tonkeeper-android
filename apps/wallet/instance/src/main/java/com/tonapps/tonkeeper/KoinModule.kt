@@ -30,6 +30,9 @@ import com.tonapps.tonkeeper.ui.screen.picker.PickerViewModel
 import com.tonapps.tonkeeper.ui.screen.settings.main.SettingsViewModel
 import com.tonapps.tonkeeper.ui.screen.settings.security.SecurityViewModel
 import com.tonapps.tonkeeper.ui.screen.settings.theme.ThemeViewModel
+import com.tonapps.tonkeeper.ui.screen.swap.main.SwapViewModel
+import com.tonapps.tonkeeper.ui.screen.swap.choose.SwapChooseViewModel
+import com.tonapps.tonkeeper.ui.screen.swap.main.mappers.TokenVoMapper
 import com.tonapps.tonkeeper.ui.screen.wallet.WalletViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -49,6 +52,7 @@ val koinModel = module {
     single { PushManager(get(), get(), get(), get(), get(), get(), get()) }
     single { SignManager(get(), get(), get(), get(), get()) }
     single { HistoryHelper(get()) }
+    single { TokenVoMapper(get()) }
 
     viewModel { parameters -> NameViewModel(mode = parameters.get(), get(), get()) }
     viewModel { parameters -> InitViewModel(parameters.get(), get(), get(), get(), get(), get(), get(), get(), get()) }
@@ -74,4 +78,6 @@ val koinModel = module {
     viewModel { JettonScreenFeature(get(), get()) }
     viewModel { BrowserConnectedViewModel(get(), get()) }
     viewModel { BrowserMainViewModel() }
+    viewModel { SwapViewModel(get(), get(), get()) }
+    viewModel { parameters -> SwapChooseViewModel(chooseType = parameters.get(), get(), get()) }
 }

@@ -1,0 +1,102 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swap_choose_screen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="16dp"
+    tools:context="com.tonapps.tonkeeper.ui.screen.swap.choose.SwapChooseScreen">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/choose_token"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/choose_token"
+        android:textColor="?attr/textPrimaryColor"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/action_close"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/action_close"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center_vertical|end"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/bg_oval_button_secondary"
+        android:backgroundTint="?attr/buttonSecondaryBackgroundColor"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_close_16"
+        android:tint="?attr/buttonSecondaryForegroundColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <uikit.widget.SearchInput
+        android:id="@+id/search_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/choose_token"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/suggested_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:text="@string/suggested"
+        android:textColor="?attr/textPrimaryColor"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_input" />
+
+    <uikit.widget.RowLayout
+        android:id="@+id/suggested_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="12dp"
+        app:flow_horizontalGap="16dp"
+        app:layout_constraintStart_toStartOf="@+id/suggested_text"
+        app:layout_constraintTop_toBottomOf="@+id/suggested_text" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/other_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:text="@string/other"
+        android:textColor="?attr/textPrimaryColor"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/suggested_row" />
+
+    <uikit.widget.SimpleRecyclerView
+        android:id="@+id/tokens"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/close_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/other_text" />
+
+    <Button
+        android:id="@+id/close_button"
+        style="@style/Widget.App.Button.Secondary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:text="@string/close"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

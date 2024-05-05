@@ -1,4 +1,4 @@
-package com.tonapps.tonkeeper.ui.screen.swap
+package com.tonapps.tonkeeper.ui.screen.swap.main
 
 import android.net.Uri
 import android.os.Bundle

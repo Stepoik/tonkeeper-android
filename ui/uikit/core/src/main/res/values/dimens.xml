@@ -13,6 +13,7 @@
     <dimen name="cornerExtraSmall">8dp</dimen>
     <dimen name="cornerSmall">12dp</dimen>
     <dimen name="cornerMedium">16dp</dimen>
+    <dimen name="cornerSemiLarge">18dp</dimen>
     <dimen name="cornerLarge">20dp</dimen>
 
     <dimen name="offsetExtraExtraSmall">2dp</dimen>

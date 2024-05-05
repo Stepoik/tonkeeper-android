@@ -1,11 +1,246 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingHorizontal="16dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/action_close"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center_vertical|end"
+        android:background="@drawable/bg_oval_button_secondary"
+        android:backgroundTint="?attr/buttonSecondaryBackgroundColor"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_close_16"
+        android:tint="?attr/buttonSecondaryForegroundColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/appCompatTextView" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/action_settings"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center_vertical|end"
+        android:background="@drawable/bg_oval_button_secondary"
+        android:backgroundTint="?attr/buttonSecondaryBackgroundColor"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_copy_16"
+        android:tint="?attr/buttonSecondaryForegroundColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/appCompatTextView" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appCompatTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/swap"
+        android:textColor="?attr/textPrimaryColor"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/action_close"
+        app:layout_constraintStart_toEndOf="@+id/action_settings"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/send_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_swap_item"
+        app:layout_constraintBottom_toBottomOf="@+id/spacer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/send_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:text="@string/send"
+        android:textColor="?attr/textSecondaryColor"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/send_container"
+        app:layout_constraintTop_toTopOf="@+id/send_container" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/send_balance_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:textColor="?attr/textSecondaryColor"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/max_button"
+        app:layout_constraintEnd_toStartOf="@+id/max_button"
+        app:layout_constraintTop_toTopOf="@+id/send_title"
+        tools:text="Balance: 99,000.01 TON" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/max_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/max"
+        android:textAllCaps="true"
+        android:textColor="?attr/textAccentColor"
+        app:layout_constraintEnd_toEndOf="@+id/send_container"
+        app:layout_constraintTop_toTopOf="@+id/send_balance_text" />
+
+    <com.tonapps.tonkeeper.ui.screen.swap.view.ChooseButton
+        android:id="@+id/send_choose_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/send_title"
+        app:layout_constraintTop_toBottomOf="@+id/send_title" />
+
+    <View
+        android:id="@+id/spacer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toStartOf="@+id/send_choose_button"
+        app:layout_constraintTop_toBottomOf="@+id/send_choose_button" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/send_value"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@null"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:inputType="numberDecimal"
+        android:text="0"
+        android:textAlignment="textEnd"
+        android:textColor="?attr/textPrimaryColor"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="@+id/send_choose_button"
+        app:layout_constraintEnd_toEndOf="@+id/max_button"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toEndOf="@+id/send_choose_button"
+        app:layout_constraintTop_toTopOf="@+id/send_choose_button"
+        tools:text="1231231" />
+
+    <FrameLayout
+        android:id="@+id/receive_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_swap_item"
+        app:layout_constraintBottom_toBottomOf="@+id/receive_spacer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/send_container" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/receive_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:text="@string/receive"
+        android:textColor="?attr/textSecondaryColor"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/receive_container"
+        app:layout_constraintTop_toTopOf="@id/receive_container" />
+
+    <com.tonapps.tonkeeper.ui.screen.swap.view.ChooseButton
+        android:id="@+id/receive_choose_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/receive_title"
+        app:layout_constraintTop_toBottomOf="@+id/receive_title" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/receive_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@null"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:textAlignment="textEnd"
+        android:textColor="?attr/textPrimaryColor"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="@+id/receive_choose_button"
+        app:layout_constraintEnd_toEndOf="@+id/max_button"
+        app:layout_constraintTop_toTopOf="@+id/receive_choose_button"
+        tools:text="1231231" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/receive_balance_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:textColor="?attr/textSecondaryColor"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/receive_container"
+        app:layout_constraintTop_toTopOf="@+id/receive_title"
+        tools:text="Balance: 99,000.01 TON" />
+
+    <View
+        android:id="@+id/receive_spacer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/receive_choose_button"
+        app:layout_constraintTop_toBottomOf="@+id/receive_choose_button" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/action_swap"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_vertical|end"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/bg_oval_button_tertiary"
+        android:backgroundTint="?attr/buttonTertiaryBackgroundColor"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_swap_horizontal_outline_24"
+        android:tint="?attr/buttonSecondaryForegroundColor"
+        app:layout_constraintBottom_toTopOf="@+id/receive_container"
+        app:layout_constraintEnd_toEndOf="@+id/send_container"
+        app:layout_constraintTop_toBottomOf="@+id/send_container" />
+
+    <FrameLayout
+        android:id="@+id/submit_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/bg_swap_item"
+        android:paddingTop="15dp"
+        android:paddingBottom="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/receive_container">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/button_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textAlignment="center"
+            android:textColor="?attr/textPrimaryColor"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/receive_container"
+            tools:text="Enter Amount" />
+    </FrameLayout>
 
     <uikit.widget.webview.bridge.BridgeWebView
         android:id="@+id/web"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

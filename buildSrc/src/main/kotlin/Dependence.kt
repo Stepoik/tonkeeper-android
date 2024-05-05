@@ -78,7 +78,10 @@ object Dependence {
         const val sse = "com.squareup.okhttp3:okhttp-sse:4.12.0"
         const val moshi = "com.squareup.moshi:moshi-kotlin:1.15.0"
         const val moshiAdapters = "com.squareup.moshi:moshi-adapters:1.15.0"
+        const val moshiCodegen = "com.squareup.moshi:moshi-kotlin-codegen:1.15.0"
         const val okio = "com.squareup.okio:okio:3.9.0"
+        const val retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
+        const val retrofitMoshi = "com.squareup.retrofit2:converter-moshi:2.9.0"
     }
 
     object Firebase {
@@ -130,6 +133,7 @@ object Dependence {
             const val tonconnect = ":apps:wallet:data:tonconnect"
             const val push = ":apps:wallet:data:push"
             const val browser = ":apps:wallet:data:browser"
+            const val swap = ":apps:wallet:data:swap"
         }
     }
 }

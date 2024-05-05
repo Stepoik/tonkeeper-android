@@ -1,8 +1,7 @@
-package com.tonapps.tonkeeper.ui.screen.swap
+package com.tonapps.tonkeeper.ui.screen.swap.main
 
 import com.tonapps.tonkeeper.sign.SignRequestEntity
 import org.json.JSONArray
-import org.json.JSONObject
 import uikit.widget.webview.bridge.JsBridge
 
 class StonfiBridge2(

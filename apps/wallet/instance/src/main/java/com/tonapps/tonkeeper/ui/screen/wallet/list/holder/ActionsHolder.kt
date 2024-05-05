@@ -6,7 +6,7 @@ import com.tonapps.tonkeeper.dialog.fiat.FiatDialog
 import com.tonapps.tonkeeper.extensions.openCamera
 import com.tonapps.tonkeeper.extensions.sendCoin
 import com.tonapps.tonkeeper.ui.screen.qr.QRScreen
-import com.tonapps.tonkeeper.ui.screen.swap.SwapScreen
+import com.tonapps.tonkeeper.ui.screen.swap.main.SwapScreen
 import com.tonapps.tonkeeper.ui.screen.wallet.list.Item
 import com.tonapps.tonkeeperx.R
 import com.tonapps.wallet.api.entity.TokenEntity

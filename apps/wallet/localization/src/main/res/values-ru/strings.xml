@@ -257,4 +257,11 @@
     <string name="search_browser">Поиск</string>
     <string name="explore">Витрина</string>
     <string name="connected">Подключённые</string>
+
+    <string name="choose_token">Выбрать токен</string>
+    <string name="other">Другие</string>
+    <string name="suggested">Предложенные</string>
+    <string name="swap_balance">Баланс: %1$s %2$s</string>
+    <string name="choose">Выбрать</string>
+    <string name="close">Закрыть</string>
 </resources>

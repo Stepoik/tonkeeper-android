@@ -260,4 +260,11 @@
     <string name="search_browser">Search or enter address</string>
     <string name="explore">Explore</string>
     <string name="connected">Connected</string>
+
+    <string name="choose_token">Choose token</string>
+    <string name="other">Other</string>
+    <string name="suggested">Suggested</string>
+    <string name="swap_balance">Balance: %1$s %2$s</string>
+    <string name="choose">Choose</string>
+    <string name="close">Close</string>
 </resources>

@@ -20,6 +20,7 @@ import com.tonapps.wallet.data.browser.browserModule
 import com.tonapps.wallet.data.collectibles.collectiblesModule
 import com.tonapps.wallet.data.events.eventsModule
 import com.tonapps.wallet.data.push.pushModule
+import com.tonapps.wallet.data.swap.swapModule
 import com.tonapps.wallet.data.tonconnect.tonConnectModule
 import uikit.widget.webview.bridge.BridgeWebView
 
@@ -51,7 +52,7 @@ class App: Application(), CameraXConfig.Provider {
 
         startKoin {
             androidContext(this@App)
-            modules(koinModel, browserModule, pushModule, tonConnectModule, apiModule, accountModule, ratesModule, tokenModule, eventsModule, collectiblesModule)
+            modules(koinModel, browserModule, pushModule, tonConnectModule, apiModule, accountModule, ratesModule, tokenModule, eventsModule, collectiblesModule, swapModule)
         }
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
