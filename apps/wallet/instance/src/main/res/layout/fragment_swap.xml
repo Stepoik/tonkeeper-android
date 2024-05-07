@@ -94,7 +94,7 @@
         app:layout_constraintEnd_toEndOf="@+id/send_container"
         app:layout_constraintTop_toTopOf="@+id/send_balance_text" />
 
-    <com.tonapps.tonkeeper.ui.screen.swap.view.ChooseButton
+    <com.tonapps.tonkeeper.ui.component.choosebutton.ChooseButtonView
         android:id="@+id/send_choose_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -154,7 +154,7 @@
         app:layout_constraintStart_toStartOf="@id/receive_container"
         app:layout_constraintTop_toTopOf="@id/receive_container" />
 
-    <com.tonapps.tonkeeper.ui.screen.swap.view.ChooseButton
+    <com.tonapps.tonkeeper.ui.component.choosebutton.ChooseButtonView
         android:id="@+id/receive_choose_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -189,13 +189,23 @@
         app:layout_constraintTop_toTopOf="@+id/receive_title"
         tools:text="Balance: 99,000.01 TON" />
 
+    <com.tonapps.tonkeeper.ui.screen.swap.main.view.SwapInformationView
+        android:id="@+id/swap_information"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/receive_container"
+        app:layout_constraintStart_toStartOf="@+id/receive_container"
+        app:layout_constraintTop_toBottomOf="@+id/receive_choose_button" />
+
     <View
         android:id="@+id/receive_spacer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="@+id/receive_choose_button"
-        app:layout_constraintTop_toBottomOf="@+id/receive_choose_button" />
+        app:layout_constraintTop_toBottomOf="@+id/swap_information" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/action_swap"

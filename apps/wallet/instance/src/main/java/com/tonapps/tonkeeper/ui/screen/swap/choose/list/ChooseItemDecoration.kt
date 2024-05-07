@@ -1,14 +1,15 @@
 package com.tonapps.tonkeeper.ui.screen.swap.choose.list
 
-import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.RectF
-import android.util.TypedValue
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.tonapps.uikit.color.UIKitColor
+import com.tonapps.uikit.color.resolveColor
+import uikit.extensions.dp
 import com.tonapps.uikit.color.R as UIKitR
 
 class ChooseItemDecoration : RecyclerView.ItemDecoration() {
@@ -51,16 +52,11 @@ class ChooseItemDecoration : RecyclerView.ItemDecoration() {
     }
 
     private fun drawDivider(canvas: Canvas, view: View) {
-        val dividerPaint = Paint()
-        val theme = view.context.theme
-        val typedValue = TypedValue()
-        theme.resolveAttribute(
-            UIKitR.attr.separatorCommonColor,
-            typedValue,
-            true
-        )
-        dividerPaint.color = typedValue.data
-        val left = view.left + 16.toPx(view.context)
+        val dividerPaint = Paint().apply {
+            strokeWidth = .5f.dp
+            color = view.context.resolveColor(UIKitColor.separatorCommonColor)
+        }
+        val left = view.left + 16.dp.toFloat()
         val top = view.top.toFloat()
         val right = view.right.toFloat()
         val bottom = view.top.toFloat() + 4
@@ -72,10 +68,4 @@ class ChooseItemDecoration : RecyclerView.ItemDecoration() {
             dividerPaint
         )
     }
-
-    fun Int.toPx(context: Context): Float = TypedValue.applyDimension(
-        TypedValue.COMPLEX_UNIT_DIP,
-        this.toFloat(),
-        context.resources.displayMetrics
-    )
 }

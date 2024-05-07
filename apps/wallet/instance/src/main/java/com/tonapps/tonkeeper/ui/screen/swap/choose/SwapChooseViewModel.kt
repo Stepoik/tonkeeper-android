@@ -6,6 +6,7 @@ import com.tonapps.tonkeeper.ui.screen.swap.choose.list.ChooseItem
 import com.tonapps.tonkeeper.ui.screen.swap.choose.models.SuggestedItemVO
 import com.tonapps.wallet.data.account.WalletRepository
 import com.tonapps.wallet.data.swap.SwapRepository
+import com.tonapps.wallet.data.swap.SwapSettingsRepository
 import com.tonapps.wallet.data.swap.entities.StonfiTokenEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,7 +21,8 @@ import kotlinx.coroutines.launch
 class SwapChooseViewModel(
     private val chooseType: Int,
     private val swapRepository: SwapRepository,
-    private val walletRepository: WalletRepository
+    private val walletRepository: WalletRepository,
+    private val swapSettingsRepository: SwapSettingsRepository
 ) : ViewModel() {
     private val _tokens = MutableStateFlow<List<StonfiTokenEntity>?>(null)
     val tokens = _tokens.asStateFlow().filterNotNull().map {
@@ -31,7 +33,7 @@ class SwapChooseViewModel(
     val close = _close.asStateFlow()
 
     val suggestedTokens: Flow<List<SuggestedItemVO>> = combine(
-        swapRepository.suggestedTokens,
+        swapSettingsRepository.suggestedTokens,
         walletRepository.activeWalletFlow
     ) { tokens, wallet ->
         val result = mutableListOf<SuggestedItemVO>()
@@ -58,9 +60,9 @@ class SwapChooseViewModel(
     fun onSelect(contractAddress: String) {
         viewModelScope.launch {
             if (chooseType == ChooseType.SEND) {
-                swapRepository.selectSend(contractAddress)
+                swapSettingsRepository.selectSend(contractAddress)
             } else {
-                swapRepository.selectReceive(contractAddress)
+                swapSettingsRepository.selectReceive(contractAddress)
             }
             _close.value = true
         }

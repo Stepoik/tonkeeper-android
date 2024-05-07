@@ -2,29 +2,19 @@ package com.tonapps.tonkeeper.ui.screen.swap.choose
 
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup.MarginLayoutParams
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.MarginLayoutParamsCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.RecyclerView
 import com.tonapps.tonkeeper.ui.screen.swap.choose.list.ChooseAdapter
 import com.tonapps.tonkeeper.ui.screen.swap.choose.list.ChooseItemDecoration
 import com.tonapps.tonkeeper.ui.screen.swap.choose.list.ChooseSwapArgs
 import com.tonapps.tonkeeper.ui.screen.swap.choose.models.SuggestedItemVO
-import com.tonapps.tonkeeper.ui.screen.swap.view.ChooseButton
+import com.tonapps.tonkeeper.ui.component.choosebutton.ChooseButtonView
 import com.tonapps.tonkeeperx.R
 import com.tonapps.uikit.list.BaseListItem
-import com.tonapps.uikit.list.LinearLayoutManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import uikit.base.BaseFragment
-import uikit.extensions.applyBottomInsets
 import uikit.extensions.applyNavBottomPadding
-import uikit.extensions.bottomBarsOffset
 import uikit.extensions.collectFlow
-import uikit.extensions.setPaddingBottom
 import uikit.widget.RowLayout
 import uikit.widget.SearchInput
 
@@ -96,7 +86,7 @@ class SwapChooseScreen : BaseFragment(R.layout.fragment_swap_choose_screen),
         suggestedRow.visibility = View.VISIBLE
         suggestedText.visibility = View.VISIBLE
         for (token in tokens) {
-            val chooseButton = ChooseButton(requireContext())
+            val chooseButton = ChooseButtonView(requireContext())
             chooseButton.setOnClickListener { viewModel.onSelect(token.token) }
             chooseButton.setParameters(token.toChooseButtonParameters())
             suggestedRow.addView(chooseButton)

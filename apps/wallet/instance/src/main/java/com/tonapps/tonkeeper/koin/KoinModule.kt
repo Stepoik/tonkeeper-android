@@ -36,6 +36,7 @@ import com.tonapps.tonkeeper.ui.screen.settings.security.SecurityViewModel
 import com.tonapps.tonkeeper.ui.screen.settings.theme.ThemeViewModel
 import com.tonapps.tonkeeper.ui.screen.swap.main.SwapViewModel
 import com.tonapps.tonkeeper.ui.screen.swap.choose.SwapChooseViewModel
+import com.tonapps.tonkeeper.ui.screen.swap.main.mappers.SwapInformationVoMapper
 import com.tonapps.tonkeeper.ui.screen.swap.main.mappers.TokenVoMapper
 import com.tonapps.tonkeeper.ui.screen.wallet.WalletViewModel
 import com.tonapps.tonkeeper.ui.screen.wallet.list.WalletAdapter
@@ -58,6 +59,7 @@ val koinModel = module {
     single { SignManager(get(), get(), get(), get(), get()) }
     single { HistoryHelper(get(), get()) }
     single { TokenVoMapper(get()) }
+    single { SwapInformationVoMapper(get()) }
 
     uiAdapter { WalletAdapter(get()) }
     uiAdapter { WalletPickerAdapter() }
@@ -84,8 +86,8 @@ val koinModel = module {
     viewModel { BrowserMainViewModel(get()) }
     viewModel { BrowserSearchViewModel(get(), get(), get(), get()) }
     viewModel { DAppViewModel(get(), get()) }
-    viewModel { SwapViewModel(get(), get(), get()) }
-    viewModel { parameters -> SwapChooseViewModel(chooseType = parameters.get(), get(), get()) }
+    viewModel { SwapViewModel(get(), get(), get(), get(), get()) }
+    viewModel { parameters -> SwapChooseViewModel(chooseType = parameters.get(), get(), get(), get()) }
 
     viewModel { BrowserMainViewModel(get()) }
     viewModel { BrowserSearchViewModel(get(), get(), get(), get()) }

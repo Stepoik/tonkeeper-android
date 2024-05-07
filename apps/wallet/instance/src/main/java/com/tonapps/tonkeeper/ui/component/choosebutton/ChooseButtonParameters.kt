@@ -1,4 +1,4 @@
-package com.tonapps.tonkeeper.ui.screen.swap.view
+package com.tonapps.tonkeeper.ui.component.choosebutton
 
 data class ChooseButtonParameters(
     val iconURL: String,

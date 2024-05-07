@@ -4,5 +4,5 @@ data class SwapAddresses(
     val send: String? = null,
     val receive: String? = null
 ) {
-    val isEmpty get() = run { send == null && receive == null }
+    val isEmpty get() = send == null && receive == null
 }

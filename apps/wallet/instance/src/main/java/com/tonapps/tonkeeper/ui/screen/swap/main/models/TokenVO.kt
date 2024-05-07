@@ -1,6 +1,6 @@
 package com.tonapps.tonkeeper.ui.screen.swap.main.models
 
-import com.tonapps.tonkeeper.ui.screen.swap.view.ChooseButtonParameters
+import com.tonapps.tonkeeper.ui.component.choosebutton.ChooseButtonParameters
 
 data class TokenVO(
     val balance: String,

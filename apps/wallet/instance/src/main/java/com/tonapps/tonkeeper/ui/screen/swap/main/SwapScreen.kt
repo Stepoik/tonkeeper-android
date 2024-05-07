@@ -3,16 +3,24 @@ package com.tonapps.tonkeeper.ui.screen.swap.main
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
+import androidx.appcompat.widget.AppCompatTextView
 import com.tonapps.tonkeeper.sign.SignRequestEntity
 import com.tonapps.tonkeeper.ui.screen.root.RootViewModel
 import com.tonapps.tonkeeper.ui.screen.swap.main.components.ReceiveComponent
 import com.tonapps.tonkeeper.ui.screen.swap.main.components.SendComponent
+import com.tonapps.tonkeeper.ui.screen.swap.main.models.SwapInformationVO
+import com.tonapps.tonkeeper.ui.screen.swap.main.view.SwapInformationView
 import com.tonapps.tonkeeperx.BuildConfig
 import com.tonapps.tonkeeperx.R
+import com.tonapps.uikit.color.UIKitColor
+import com.tonapps.uikit.color.resolveColor
+import com.tonapps.wallet.localization.Localization
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import uikit.base.BaseFragment
 import uikit.extensions.applyNavBottomPadding
+import uikit.extensions.collectFlow
 import uikit.extensions.getDimensionPixelSize
 import uikit.navigation.Navigation.Companion.navigation
 import uikit.widget.webview.bridge.BridgeWebView
@@ -30,6 +38,9 @@ class SwapScreen : BaseFragment(R.layout.fragment_swap), BaseFragment.BottomShee
     private lateinit var closeButton: View
     private lateinit var receiveComponent: ReceiveComponent
     private lateinit var sendComponent: SendComponent
+    private lateinit var swapInformationView: SwapInformationView
+    private lateinit var submitButton: View
+    private lateinit var submitButtonText: AppCompatTextView
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,6 +48,11 @@ class SwapScreen : BaseFragment(R.layout.fragment_swap), BaseFragment.BottomShee
 
         sendComponent = SendComponent(view, swapViewModel, navigation, this)
         receiveComponent = ReceiveComponent(view, swapViewModel, navigation, this, requireContext())
+
+        submitButton = view.findViewById(R.id.submit_button)
+        submitButtonText = view.findViewById(R.id.button_text)
+
+        swapInformationView = view.findViewById(R.id.swap_information)
 
         webView = view.findViewById(R.id.web)
         webView.clipToPadding = false
@@ -54,6 +70,32 @@ class SwapScreen : BaseFragment(R.layout.fragment_swap), BaseFragment.BottomShee
         closeButton = view.findViewById(R.id.action_close)
         closeButton.setOnClickListener { finish() }
 
+        collectFlow(swapViewModel.swapInformation, ::setSwapInformation)
+    }
+
+    private fun setSwapInformation(swapInformation: SwapInformationVO?) {
+        updateButtonState(swapInformation)
+        if (swapInformation?.swapSimulation == null) {
+            swapInformationView.visibility = View.GONE
+            return
+        }
+        swapInformationView.setInformation(swapInformation.swapSimulation)
+        swapInformationView.visibility = View.VISIBLE
+    }
+
+    private fun updateButtonState(swapInformation: SwapInformationVO?) {
+        if (swapInformation == null || swapInformation.swapTokens.second == null) {
+            submitButtonText.text = "Choose token"
+            submitButton.setBackgroundResource(R.drawable.bg_swap_item)
+            return
+        }
+        if (swapInformation.swapSimulation == null) {
+            submitButtonText.text = "Enter amount"
+            submitButton.setBackgroundResource(R.drawable.bg_swap_item)
+            return
+        }
+        submitButtonText.text = "Continue"
+        submitButton.setBackgroundResource(R.drawable.bg_button_primary)
     }
 
     private fun getUri(): Uri {

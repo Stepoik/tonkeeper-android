@@ -9,7 +9,8 @@ import com.tonapps.tonkeeper.ui.screen.swap.choose.ChooseType
 import com.tonapps.tonkeeper.ui.screen.swap.choose.SwapChooseScreen
 import com.tonapps.tonkeeper.ui.screen.swap.main.SwapViewModel
 import com.tonapps.tonkeeper.ui.screen.swap.main.models.TokenVO
-import com.tonapps.tonkeeper.ui.screen.swap.view.ChooseButton
+import com.tonapps.tonkeeper.ui.component.choosebutton.ChooseButtonView
+import com.tonapps.tonkeeper.ui.screen.swap.main.models.SwapInformationVO
 import com.tonapps.tonkeeperx.R
 import uikit.extensions.collectFlow
 import uikit.navigation.Navigation
@@ -20,23 +21,20 @@ class SendComponent(
     private val navigation: Navigation?,
     private val lifecycleOwner: LifecycleOwner,
 ) {
-    private val sendButton: ChooseButton = view.findViewById(R.id.send_choose_button)
+    private val sendButton: ChooseButtonView = view.findViewById(R.id.send_choose_button)
     private val sendBalanceText: AppCompatTextView = view.findViewById(R.id.send_balance_text)
     private val sendValueEditText: AppCompatEditText = view.findViewById(R.id.send_value)
 
     init {
         sendButton.setOnClickListener { navigation?.add(SwapChooseScreen.newInstance(ChooseType.SEND)) }
-        lifecycleOwner.collectFlow(viewModel.swaps, ::updateSendInformation)
+        lifecycleOwner.collectFlow(viewModel.swapInformation, ::updateSendInformation)
         sendValueEditText.addTextChangedListener { text ->
-            if (text.isNullOrEmpty()) {
-                viewModel.updateSendValue("0")
-            }
-            viewModel.updateSendValue(text.toString())
+            viewModel.updateSendValue(text?.toString())
         }
     }
 
-    private fun updateSendInformation(tokens: Pair<TokenVO?, TokenVO?>) {
-        val sendToken = tokens.first
+    private fun updateSendInformation(info: SwapInformationVO) {
+        val sendToken = info.swapTokens.first
         if (sendToken != null) {
             setSendInformation(sendToken)
             return

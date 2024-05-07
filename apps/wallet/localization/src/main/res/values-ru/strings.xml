@@ -270,5 +270,11 @@
     <string name="choose">Выбрать</string>
     <string name="close">Закрыть</string>
 
+    <string name="price_impact">Влияние на цену</string>
+    <string name="minimum_received">Минимальный порог</string>
+    <string name="provider_fee">Комиссия за предоставление ликвидности</string>
+    <string name="blockchain_fee">Комиссия блокчейна</string>
+    <string name="route">Путь</string>
+    <string name="provider">Провайдер</string>
     <string name="browser_search_placeholder">Введите адрес или начните поиск</string>
 </resources>

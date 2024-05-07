@@ -1,17 +1,16 @@
-package com.tonapps.tonkeeper.ui.screen.swap.view
+package com.tonapps.tonkeeper.ui.component.choosebutton
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.TypedValue
 import androidx.appcompat.widget.AppCompatTextView
 import com.tonapps.tonkeeperx.R
 import com.tonapps.wallet.localization.Localization
+import uikit.extensions.dp
 import uikit.widget.FrescoView
 import uikit.widget.RowLayout
-import kotlin.math.roundToInt
 
 
-class ChooseButton @JvmOverloads constructor(
+class ChooseButtonView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0,
@@ -28,8 +27,8 @@ class ChooseButton @JvmOverloads constructor(
 
     fun setParameters(parameters: ChooseButtonParameters) {
         val chooseTextViewParams = chooseTextView.layoutParams as MarginLayoutParams
-        chooseTextViewParams.marginStart = 8.toPx()
-        chooseTextViewParams.marginEnd = 16.toPx()
+        chooseTextViewParams.marginStart = 8.dp
+        chooseTextViewParams.marginEnd = 16.dp
         iconView.visibility = VISIBLE
         iconView.setImageURI(parameters.iconURL)
         chooseTextView.text = parameters.text
@@ -39,13 +38,7 @@ class ChooseButton @JvmOverloads constructor(
         chooseTextView.setText(emptyText)
         iconView.visibility = GONE
         val chooseTextViewParams = chooseTextView.layoutParams as MarginLayoutParams
-        chooseTextViewParams.marginStart = 14.toPx()
-        chooseTextViewParams.marginEnd = 14.toPx()
+        chooseTextViewParams.marginStart = 14.dp
+        chooseTextViewParams.marginEnd = 14.dp
     }
-
-    private fun Int.toPx(): Int = TypedValue.applyDimension(
-        TypedValue.COMPLEX_UNIT_DIP,
-        this.toFloat(),
-        resources.displayMetrics
-    ).roundToInt()
 }

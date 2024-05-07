@@ -24,8 +24,17 @@ class LocalDataSource(
         return@withContext SwapAddresses(send = sendAddress, receive = receiveAddress)
     }
 
+    suspend fun setSlippageTolerance(value: String) = withContext(Dispatchers.IO) {
+        preferences.string(Scheme.SLIPPAGE_TOLERANCE, value)
+    }
+
+    suspend fun getSlippageTolerance(): String? = withContext(Dispatchers.IO) {
+        preferences.string(Scheme.SLIPPAGE_TOLERANCE)
+    }
+
     object Scheme {
         const val SEND_ADDRESS = "send_address"
         const val RECEIVE_ADDRESS = "receive_address"
+        const val SLIPPAGE_TOLERANCE = "slippage_tolerance"
     }
 }
