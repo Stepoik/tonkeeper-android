@@ -4,13 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tonapps.blockchain.Coin
 import com.tonapps.network.NetworkMonitor
-import com.tonapps.tonkeeper.ui.screen.swap.main.mappers.SwapInformationVoMapper
-import com.tonapps.tonkeeper.ui.screen.swap.main.mappers.TokenVoMapper
-import com.tonapps.tonkeeper.ui.screen.swap.main.models.SwapInformationVO
-import com.tonapps.tonkeeper.ui.screen.swap.main.models.TokenVO
+import com.tonapps.tonkeeper.ui.screen.swap.main.mappers.SwapInformationVoFormatter
 import com.tonapps.wallet.data.account.WalletRepository
-import com.tonapps.wallet.data.rates.RatesRepository
-import com.tonapps.wallet.data.settings.SettingsRepository
 import com.tonapps.wallet.data.swap.SwapRepository
 import com.tonapps.wallet.data.swap.SwapSettingsRepository
 import com.tonapps.wallet.data.swap.entities.StonfiTokenEntity
@@ -18,13 +13,10 @@ import com.tonapps.wallet.data.swap.entities.SwapInformationEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
@@ -34,7 +26,7 @@ class SwapViewModel(
     private val swapSettingsRepository: SwapSettingsRepository,
     private val walletRepository: WalletRepository,
     private val networkMonitor: NetworkMonitor,
-    private val swapInformationVoMapper: SwapInformationVoMapper
+    private val swapInformationVoMapper: SwapInformationVoFormatter
 ) : ViewModel() {
 
     private var previousTokenPair = Pair<StonfiTokenEntity?, StonfiTokenEntity?>(null, null)

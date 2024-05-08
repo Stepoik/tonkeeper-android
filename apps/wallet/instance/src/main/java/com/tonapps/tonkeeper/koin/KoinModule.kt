@@ -36,8 +36,8 @@ import com.tonapps.tonkeeper.ui.screen.settings.security.SecurityViewModel
 import com.tonapps.tonkeeper.ui.screen.settings.theme.ThemeViewModel
 import com.tonapps.tonkeeper.ui.screen.swap.main.SwapViewModel
 import com.tonapps.tonkeeper.ui.screen.swap.choose.SwapChooseViewModel
-import com.tonapps.tonkeeper.ui.screen.swap.main.mappers.SwapInformationVoMapper
-import com.tonapps.tonkeeper.ui.screen.swap.main.mappers.TokenVoMapper
+import com.tonapps.tonkeeper.ui.screen.swap.main.mappers.SwapInformationVoFormatter
+import com.tonapps.tonkeeper.ui.screen.swap.main.mappers.TokenVoFormatter
 import com.tonapps.tonkeeper.ui.screen.wallet.WalletViewModel
 import com.tonapps.tonkeeper.ui.screen.wallet.list.WalletAdapter
 import kotlinx.coroutines.CoroutineScope
@@ -58,8 +58,8 @@ val koinModel = module {
     single { PushManager(get(), get(), get(), get(), get(), get(), get()) }
     single { SignManager(get(), get(), get(), get(), get()) }
     single { HistoryHelper(get(), get()) }
-    single { TokenVoMapper(get()) }
-    single { SwapInformationVoMapper(get()) }
+    single { TokenVoFormatter(get()) }
+    single { SwapInformationVoFormatter(get()) }
 
     uiAdapter { WalletAdapter(get()) }
     uiAdapter { WalletPickerAdapter() }
