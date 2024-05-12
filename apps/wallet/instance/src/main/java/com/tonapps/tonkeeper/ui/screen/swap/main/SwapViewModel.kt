@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tonapps.blockchain.Coin
 import com.tonapps.network.NetworkMonitor
-import com.tonapps.tonkeeper.ui.screen.swap.main.mappers.SwapInformationVoFormatter
+import com.tonapps.tonkeeper.ui.screen.swap.common.formatters.SwapInformationVoFormatter
 import com.tonapps.wallet.data.account.WalletRepository
 import com.tonapps.wallet.data.swap.SwapRepository
 import com.tonapps.wallet.data.swap.SwapSettingsRepository
@@ -12,9 +12,13 @@ import com.tonapps.wallet.data.swap.entities.StonfiTokenEntity
 import com.tonapps.wallet.data.swap.entities.SwapInformationEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.update
@@ -37,6 +41,9 @@ class SwapViewModel(
     val swapInformation = combine(_swaps, _swapInformation) { tokens, swapInfo ->
         swapInformationVoMapper.mapToVo(swapInfo, tokens)
     }
+
+    private val _confirmFlow = MutableSharedFlow<NavigationSettings>()
+    val confirmFlow = _confirmFlow.asSharedFlow()
 
     private val _unitsFlow = MutableStateFlow(DEFAULT_UNITS)
     private val unitsFlow = _unitsFlow.debounce(UNITS_DEBOUNCE)
@@ -75,8 +82,8 @@ class SwapViewModel(
             val sendToken = tokens.first ?: return@combine
             val receiveToken = tokens.second ?: return@combine
             val swapInfo = swapRepository.simulateSwap(
-                sendToken = sendToken,
-                receiveToken = receiveToken,
+                sendToken = sendToken.contractAddress,
+                receiveToken = receiveToken.contractAddress,
                 units = Coin.bigDecimal(units, sendToken.decimals).toString()
             ) ?: return@combine
             previousTokenPair = tokens
@@ -102,6 +109,17 @@ class SwapViewModel(
     fun swap() {
         viewModelScope.launch {
             swapRepository.swapTokens()
+        }
+    }
+
+    fun confirm() {
+        val swapInformation = _swapInformation.value ?: return
+        viewModelScope.launch {
+            _confirmFlow.emit(NavigationSettings(
+                units = _unitsFlow.value,
+                sendAddress = swapInformation.offerAddresses,
+                receiveAddress = swapInformation.askAddresses
+            ))
         }
     }
 

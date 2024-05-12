@@ -279,6 +279,7 @@
     <string name="blockchain_fee">Blockchain fee</string>
     <string name="route">Route</string>
     <string name="provider">Provider</string>
+    <string name="confirm_swap">Confirm swap</string>
 
     <string name="browser_search_placeholder">Enter an address or search the web</string>
 </resources>

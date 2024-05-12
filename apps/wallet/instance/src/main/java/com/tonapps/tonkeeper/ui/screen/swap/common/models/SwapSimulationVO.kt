@@ -1,4 +1,4 @@
-package com.tonapps.tonkeeper.ui.screen.swap.main.models
+package com.tonapps.tonkeeper.ui.screen.swap.common.models
 
 data class SwapSimulationVO(
     val priceImpact: String,

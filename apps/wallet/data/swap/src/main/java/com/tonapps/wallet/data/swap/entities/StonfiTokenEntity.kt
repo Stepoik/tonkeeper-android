@@ -25,6 +25,8 @@ data class StonfiTokenEntity(
     val blacklisted: Boolean,
     @Json(name = "default_symbol")
     val defaultSymbol: Boolean,
+    @Json(name = "dex_usd_price")
+    val dexUsdPrice: String? = null,
     @Json(name = "balance")
     val balance: String = "0"
 ) {

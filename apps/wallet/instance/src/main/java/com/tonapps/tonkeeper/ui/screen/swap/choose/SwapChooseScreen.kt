@@ -38,6 +38,7 @@ class SwapChooseScreen : BaseFragment(R.layout.fragment_swap_choose_screen),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         rootView = view.findViewById(R.id.swap_choose_screen)
         rootView.applyNavBottomPadding()
 

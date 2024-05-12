@@ -1,17 +1,18 @@
 package com.tonapps.tonkeeper.ui.screen.swap.choose.list
 
+import com.tonapps.blockchain.Coin
 import com.tonapps.uikit.list.BaseListItem
 import com.tonapps.wallet.data.swap.entities.StonfiTokenEntity
 
 sealed class ChooseItem(
     type: Int
-): BaseListItem(type) {
+) : BaseListItem(type) {
     companion object {
         const val SKELETON = 0
         const val TOKEN = 1
     }
 
-    class Skeleton: ChooseItem(SKELETON)
+    class Skeleton : ChooseItem(SKELETON)
 
     data class Token(
         val contractAddress: String,
@@ -19,11 +20,11 @@ sealed class ChooseItem(
         val symbol: String,
         val displayName: String,
         val balance: String
-    ): ChooseItem(TOKEN) {
+    ) : ChooseItem(TOKEN) {
         companion object {
             fun fromStonfiToken(tokenEntity: StonfiTokenEntity): Token {
-                val stringPattern = "%.${tokenEntity.decimals}f"
-                val balanceString = stringPattern.format(tokenEntity.balance.toFloat())
+                val balanceString =
+                    Coin.parseJettonBalance(tokenEntity.balance, tokenEntity.decimals).toString()
                 return Token(
                     contractAddress = tokenEntity.contractAddress,
                     displayName = tokenEntity.displayName,

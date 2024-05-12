@@ -9,8 +9,9 @@ import com.tonapps.tonkeeper.sign.SignRequestEntity
 import com.tonapps.tonkeeper.ui.screen.root.RootViewModel
 import com.tonapps.tonkeeper.ui.screen.swap.main.components.ReceiveComponent
 import com.tonapps.tonkeeper.ui.screen.swap.main.components.SendComponent
-import com.tonapps.tonkeeper.ui.screen.swap.main.models.SwapInformationVO
-import com.tonapps.tonkeeper.ui.screen.swap.main.view.SwapInformationView
+import com.tonapps.tonkeeper.ui.screen.swap.common.models.SwapInformationVO
+import com.tonapps.tonkeeper.ui.screen.swap.common.view.SwapInformationView
+import com.tonapps.tonkeeper.ui.screen.swap.confirm.ConfirmSwapScreen
 import com.tonapps.tonkeeperx.BuildConfig
 import com.tonapps.tonkeeperx.R
 import com.tonapps.uikit.color.UIKitColor
@@ -71,6 +72,17 @@ class SwapScreen : BaseFragment(R.layout.fragment_swap), BaseFragment.BottomShee
         closeButton.setOnClickListener { finish() }
 
         collectFlow(swapViewModel.swapInformation, ::setSwapInformation)
+        collectFlow(swapViewModel.confirmFlow, ::onConfirm)
+    }
+
+    private fun onConfirm(navigationSettings: NavigationSettings) {
+        navigation?.add(
+            ConfirmSwapScreen.newInstance(
+                units = navigationSettings.units,
+                sendAddress = navigationSettings.sendAddress,
+                receiveAddress = navigationSettings.receiveAddress
+            )
+        )
     }
 
     private fun setSwapInformation(swapInformation: SwapInformationVO?) {
@@ -87,15 +99,18 @@ class SwapScreen : BaseFragment(R.layout.fragment_swap), BaseFragment.BottomShee
         if (swapInformation == null || swapInformation.swapTokens.second == null) {
             submitButtonText.text = "Choose token"
             submitButton.setBackgroundResource(R.drawable.bg_swap_item)
+            submitButton.setOnClickListener(null)
             return
         }
         if (swapInformation.swapSimulation == null) {
             submitButtonText.text = "Enter amount"
             submitButton.setBackgroundResource(R.drawable.bg_swap_item)
+            submitButton.setOnClickListener(null)
             return
         }
         submitButtonText.text = "Continue"
         submitButton.setBackgroundResource(R.drawable.bg_button_primary)
+        submitButton.setOnClickListener { swapViewModel.confirm() }
     }
 
     private fun getUri(): Uri {

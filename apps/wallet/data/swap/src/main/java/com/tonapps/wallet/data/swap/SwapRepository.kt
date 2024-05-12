@@ -21,14 +21,13 @@ class SwapRepository(
 
 
     suspend fun simulateSwap(
-        sendToken: StonfiTokenEntity,
-        receiveToken: StonfiTokenEntity,
+        sendToken: String,
+        receiveToken: String,
         units: String
     ): SwapInformationEntity? {
         return remoteDataSource.simulateSwap(
-            sendAddress = sendToken.contractAddress,
-            receiveAddress = receiveToken.contractAddress,
-//            units = formatUnits(units, sendToken.decimals),
+            sendAddress = sendToken,
+            receiveAddress = receiveToken,
             units = units,
             slippageTolerance = swapSettingsRepository.getSlippageTolerance()
         )

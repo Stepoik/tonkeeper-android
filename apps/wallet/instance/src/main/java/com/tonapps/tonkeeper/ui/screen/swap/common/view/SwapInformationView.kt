@@ -1,9 +1,9 @@
-package com.tonapps.tonkeeper.ui.screen.swap.main.view
+package com.tonapps.tonkeeper.ui.screen.swap.common.view
 
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
-import com.tonapps.tonkeeper.ui.screen.swap.main.models.SwapSimulationVO
+import com.tonapps.tonkeeper.ui.screen.swap.common.models.SwapSimulationVO
 import com.tonapps.tonkeeperx.R
 import uikit.widget.RowLayout
 

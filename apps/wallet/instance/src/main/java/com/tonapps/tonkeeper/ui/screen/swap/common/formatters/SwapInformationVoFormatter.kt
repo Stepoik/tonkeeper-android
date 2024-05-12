@@ -1,29 +1,30 @@
-package com.tonapps.tonkeeper.ui.screen.swap.main.mappers
+package com.tonapps.tonkeeper.ui.screen.swap.common.formatters
 
 import com.tonapps.blockchain.Coin
-import com.tonapps.tonkeeper.ui.screen.swap.main.models.SwapInformationVO
-import com.tonapps.tonkeeper.ui.screen.swap.main.models.SwapSimulationVO
+import com.tonapps.tonkeeper.ui.screen.swap.common.models.SwapInformationVO
+import com.tonapps.tonkeeper.ui.screen.swap.common.models.SwapSimulationVO
 import com.tonapps.wallet.data.swap.entities.StonfiTokenEntity
 import com.tonapps.wallet.data.swap.entities.SwapInformationEntity
 
 class SwapInformationVoFormatter(
-    private val tokenVoMapper: TokenVoFormatter
+    private val tokenVoFormatter: TokenVoFormatter
 ) {
     fun mapToVo(
-        swapInformationEntity: SwapInformationEntity?,
-        tokens: Pair<StonfiTokenEntity?, StonfiTokenEntity?>
+        swapInformation: SwapInformationEntity?,
+        tokens: Pair<StonfiTokenEntity?, StonfiTokenEntity?>,
+        sendUnits: String = ""
     ): SwapInformationVO {
-        val sendToken = tokens.first?.let { tokenVoMapper.mapFromStonfiToken(it, "") }
+        val sendToken = tokens.first?.let { tokenVoFormatter.mapFromStonfiToken(it, sendUnits) }
         val receiveToken = tokens.second?.let {
-            tokenVoMapper.mapFromStonfiToken(
+            tokenVoFormatter.mapFromStonfiToken(
                 stonfiTokenEntity = it,
-                count = swapInformationEntity?.askUnits ?: "0"
+                count = swapInformation?.askUnits ?: "0"
             )
         }
         val firstToken = tokens.first
         val secondToken = tokens.second
         val swapSimulationVo = if (firstToken != null && secondToken != null) {
-            swapInformationEntity?.let {
+            swapInformation?.let {
                 mapSwapSimulationVo(
                     swapInformationEntity = it,
                     tokens = Pair(firstToken, secondToken)

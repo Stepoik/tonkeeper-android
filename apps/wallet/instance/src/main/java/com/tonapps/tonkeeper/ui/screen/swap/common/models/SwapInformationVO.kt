@@ -1,4 +1,4 @@
-package com.tonapps.tonkeeper.ui.screen.swap.main.models
+package com.tonapps.tonkeeper.ui.screen.swap.common.models
 
 data class SwapInformationVO(
     val swapSimulation: SwapSimulationVO?,
