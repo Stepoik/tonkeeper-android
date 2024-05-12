@@ -34,7 +34,6 @@ class SwapScreen : BaseFragment(R.layout.fragment_swap), BaseFragment.BottomShee
 
     private val swapViewModel: SwapViewModel by viewModel()
 
-    private lateinit var webView: BridgeWebView
     private lateinit var swapButton: View
     private lateinit var closeButton: View
     private lateinit var receiveComponent: ReceiveComponent
@@ -54,16 +53,6 @@ class SwapScreen : BaseFragment(R.layout.fragment_swap), BaseFragment.BottomShee
         submitButtonText = view.findViewById(R.id.button_text)
 
         swapInformationView = view.findViewById(R.id.swap_information)
-
-        webView = view.findViewById(R.id.web)
-        webView.clipToPadding = false
-        webView.applyNavBottomPadding(requireContext().getDimensionPixelSize(uikit.R.dimen.offsetMedium))
-        webView.loadUrl(getUri().toString())
-        webView.jsBridge = StonfiBridge2(
-            address = args.address,
-            close = ::finish,
-            sendTransaction = ::sing
-        )
 
         swapButton = view.findViewById(R.id.action_swap)
         swapButton.setOnClickListener { swapViewModel.swap() }
@@ -127,11 +116,6 @@ class SwapScreen : BaseFragment(R.layout.fragment_swap), BaseFragment.BottomShee
         request: SignRequestEntity
     ): String {
         return rootViewModel.requestSign(requireContext(), request)
-    }
-
-    override fun onDestroyView() {
-        webView.destroy()
-        super.onDestroyView()
     }
 
     companion object {

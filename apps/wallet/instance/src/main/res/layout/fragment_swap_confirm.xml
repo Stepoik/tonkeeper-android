@@ -178,4 +178,19 @@
         app:layout_constraintStart_toStartOf="@+id/receive_choose_button"
         app:layout_constraintTop_toBottomOf="@+id/swap_information" />
 
+    <Button
+        android:id="@+id/confirm_swap_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Сделать"
+        app:layout_constraintTop_toBottomOf="@+id/receive_container"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <uikit.widget.webview.bridge.BridgeWebView
+        android:id="@+id/web_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

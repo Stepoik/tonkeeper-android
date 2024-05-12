@@ -58,4 +58,14 @@ class ConfirmSwapViewModel(
             loadJob?.cancel()
         }
     }
+
+    suspend fun getSwapData(): SwapData {
+        val wallet = walletRepository.activeWalletFlow.first()
+        return SwapData(
+            wallet = wallet.address,
+            askAddress = receiveAddress,
+            offerAddress = sendAddress,
+            units = units
+        )
+    }
 }

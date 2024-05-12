@@ -65,7 +65,7 @@ class SwapViewModel(
                 swapRepository.getToken(wallet.address, it)
             }
             _swaps.value = Pair(sendToken, receiveToken)
-        }.flowOn(Dispatchers.Main).launchIn(viewModelScope)
+        }.launchIn(viewModelScope)
 
         combine(
             networkMonitor.isOnlineFlow,
@@ -81,6 +81,10 @@ class SwapViewModel(
             }
             val sendToken = tokens.first ?: return@combine
             val receiveToken = tokens.second ?: return@combine
+            if (units == "0") {
+                _swapInformation.value = null
+                return@combine
+            }
             val swapInfo = swapRepository.simulateSwap(
                 sendToken = sendToken.contractAddress,
                 receiveToken = receiveToken.contractAddress,
@@ -90,6 +94,10 @@ class SwapViewModel(
             _swapInformation.value = swapInfo
         }.launchIn(viewModelScope)
 
+        startUpdateLoop()
+    }
+
+    private fun startUpdateLoop() {
         viewModelScope.launch {
             while (isActive) {
                 delay(UPDATE_DELAY)

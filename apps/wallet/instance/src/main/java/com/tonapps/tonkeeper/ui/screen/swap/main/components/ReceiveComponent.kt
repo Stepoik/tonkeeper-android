@@ -2,6 +2,7 @@ package com.tonapps.tonkeeper.ui.screen.swap.main.components
 
 import android.content.Context
 import android.view.View
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.lifecycle.LifecycleOwner
 import com.tonapps.tonkeeper.ui.component.choosebutton.ChooseButtonView

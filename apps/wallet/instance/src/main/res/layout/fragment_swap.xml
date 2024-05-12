@@ -117,8 +117,10 @@
         android:layout_weight="1"
         android:background="@null"
         android:fontFamily="@font/montserrat_semi_bold"
+        android:imeOptions="actionDone"
         android:inputType="numberDecimal"
-        android:text="0"
+        android:hint="0"
+        android:textColorHint="?attr/textPrimaryColor"
         android:textAlignment="textEnd"
         android:textColor="?attr/textPrimaryColor"
         android:textSize="28sp"
@@ -164,16 +166,19 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/receive_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@null"
         android:fontFamily="@font/montserrat_semi_bold"
+        android:textIsSelectable="true"
         android:textAlignment="textEnd"
         android:textColor="?attr/textPrimaryColor"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="@+id/receive_choose_button"
-        app:layout_constraintEnd_toEndOf="@+id/max_button"
+        app:layout_constraintEnd_toEndOf="@+id/receive_balance_text"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toEndOf="@+id/receive_choose_button"
         app:layout_constraintTop_toTopOf="@+id/receive_choose_button"
         tools:text="1231231" />
 
@@ -247,10 +252,5 @@
             app:layout_constraintTop_toBottomOf="@+id/receive_container"
             tools:text="Enter Amount" />
     </FrameLayout>
-
-    <uikit.widget.webview.bridge.BridgeWebView
-        android:id="@+id/web"
-        android:layout_width="0dp"
-        android:layout_height="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
